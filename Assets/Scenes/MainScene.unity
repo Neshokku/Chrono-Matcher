@@ -159,9 +159,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c25549e98cd7b2408bc88cf6c2774cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  player: {fileID: 0}
+  player: {fileID: 874110124}
   countdownController: {fileID: 108340651}
-  enemyGenerator: {fileID: 0}
+  enemyGenerator: {fileID: 909953642}
 --- !u!4 &235658201
 Transform:
   m_ObjectHideFlags: 0
@@ -477,6 +477,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &874110124 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 865378289120305482, guid: 2811f2dc91612e4428a33b1c5eed4d16, type: 3}
+  m_PrefabInstance: {fileID: 1509635784956670872}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &909953641
 GameObject:
   m_ObjectHideFlags: 0
