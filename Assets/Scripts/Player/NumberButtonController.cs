@@ -8,6 +8,10 @@ public class NumberButtonController : MonoBehaviour
 
     [SerializeField] private ParticleSystem successParticle;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip crushSound;
+    [SerializeField] private AudioClip bonusSound;
+
     // Private Values
     private bool matchingLeft = false;
     private bool matchingRight = false;
@@ -65,28 +69,33 @@ public class NumberButtonController : MonoBehaviour
     {
         if (!isClear && collision.gameObject.CompareTag("ButtonPresser"))
         {
+            SoundManager.instance.PlaySFX(crushSound);
             Vector3 presserPosition = collision.transform.position;
             ParticleSystem successParticleInstance = Instantiate(successParticle, presserPosition, Quaternion.Euler(0.0f, 0.0f, (Mathf.Sign(presserPosition.y) == -1 ? 0.0f : 180.0f)));
             var particleMain = successParticleInstance.main;
 
             if (matchingLeft || matchingRight)
             {
+                SoundManager.instance.PlaySFX(bonusSound);
                 if (matchingLeft && matchingRight)
                 {
                     particleMain.startColor = Color.gold;
-                    GameManager.instance.GetCountdownController().IncreaseTimer(20);
-                    GameManager.instance.GetEnemyGenerator().AddBonusTime(3, 6.0f);
+                    GameManager.instance.GetCountdownController().IncreaseTimer(10);
+                    GameManager.instance.GetEnemyGenerator().AddBonusTime(3, 4.0f);
                 }
                 else if (matchingLeft)
                 {
                     particleMain.startColor = Color.red;
-                    GameManager.instance.GetCountdownController().IncreaseTimer(10);
+                    GameManager.instance.GetCountdownController().IncreaseTimer(5);
                 }
                 else if (matchingRight)
                 {
                     particleMain.startColor = Color.cyan;
                     GameManager.instance.GetEnemyGenerator().AddBonusTime(2, 6.0f);
                 }
+            } else
+            {
+                GameManager.instance.GetCountdownController().ReduceTimer(buttonNumber);
             }
             
 

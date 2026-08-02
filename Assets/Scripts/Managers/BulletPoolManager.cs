@@ -4,7 +4,6 @@ using UnityEngine;
 public class BulletPoolManager : MonoBehaviour
 {
     private const float defaultBulletSpeed = 10.0f;
-
     static public BulletPoolManager instance {  get; private set; }
 
     private Stack<GameObject> bullets = new Stack<GameObject>();
@@ -16,7 +15,6 @@ public class BulletPoolManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {

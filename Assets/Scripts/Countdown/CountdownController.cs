@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CountdownController : MonoBehaviour
 {
-    private const int maxTime = 99;
+    private const int maxTime = 60;
 
     [Header("Component References")]
     [SerializeField] private TextMeshProUGUI digit1TextMesh;
@@ -46,7 +46,7 @@ public class CountdownController : MonoBehaviour
     private IEnumerator CountdownCoroutine()
     {
         yield return new WaitForSeconds(1.0f);
-        while (timer > 0)
+        while (true)
         {
             ReduceTimer(1);
             yield return new WaitForSeconds(1.0f);
@@ -55,6 +55,8 @@ public class CountdownController : MonoBehaviour
 
     public void UpdateNumberDisplay()
     {
+        if (CheckZero()) return;
+
         int digit2 = (timer % 10);
         int digit1 = (timer - digit2) / 10;
 
@@ -73,8 +75,6 @@ public class CountdownController : MonoBehaviour
         }
 
         updatedDisplay.Invoke(digit1, digit2);
-
-        CheckZero();
     }
 
     public void ReduceTimer(int amountToReduce)
@@ -107,11 +107,17 @@ public class CountdownController : MonoBehaviour
         UpdateNumberDisplay();
     }
 
-    private void CheckZero()
+    private bool CheckZero()
     {
+        if (!GameManager.instance.gameRunning) return true;
+
         if (timer == 0)
         {
-            return;
+            StopAllCoroutines();
+            GameManager.instance.EndGame();
+            return true;
         }
+
+        return false;
     }
 }

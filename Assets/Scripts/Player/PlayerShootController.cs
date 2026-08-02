@@ -2,9 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 public class PlayerShootController : MonoBehaviour
 {
+    [SerializeField] private AudioClip shootSound;
+
     public event Action bulletShot;
 
     public void OnShoot(InputAction.CallbackContext context)
@@ -15,7 +16,7 @@ public class PlayerShootController : MonoBehaviour
             Vector2 direction = new Vector2(dirX, 0.0f);
 
             BulletPoolManager.instance.RequestBullet(transform.position, direction);
-
+            SoundManager.instance.PlaySFX(shootSound);
             bulletShot.Invoke();
         }
     }

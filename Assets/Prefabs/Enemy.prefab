@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovementController
   deathParticle: {fileID: 3660261123188904356, guid: da03eb52d4d13a54fa2bd5fdb2db789f, type: 3}
   fleetingText: {fileID: 4108658235007558386, guid: cc9d0a4b3126e244ea9e028fe95ea7c7, type: 3}
+  destroySound: {fileID: 8300000, guid: 40198b2371a399846adfdccf1f01c918, type: 3}
 --- !u!61 &6157715246888429657
 BoxCollider2D:
   m_ObjectHideFlags: 0

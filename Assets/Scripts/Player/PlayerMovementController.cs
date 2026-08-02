@@ -22,6 +22,8 @@ public class PlayerMovementController : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.instance.gameRunning) return;
+
         float yInput = playerInputController.movementInput.y;
 
         float verticalMovement = (yInput != 0 ? Mathf.Sign(yInput) : 0.0f) * speed * Time.deltaTime;

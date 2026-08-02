@@ -9,6 +9,9 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private ParticleSystem deathParticle;
     [SerializeField] private GameObject fleetingText;
 
+    [Header("Sounds")]
+    [SerializeField] private AudioClip destroySound;
+    
     private const float defaultSpeed = 7.0f;
 
     private Vector2 direction = Vector2.zero;
@@ -57,7 +60,6 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Collision");
         if (collision.gameObject.CompareTag("Bullet"))
         {
             GameManager.instance.GetCountdownController().IncreaseTimer(pointsWhenKilled);
@@ -68,6 +70,7 @@ public class EnemyController : MonoBehaviour
             ParticleSystem particlesInstance = Instantiate(deathParticle, transform.position, Quaternion.identity);
             var main = particlesInstance.main;
             main.startColor = Color.gray;
+            SoundManager.instance.PlaySFX(destroySound);
             Destroy(gameObject);
         }
     }
